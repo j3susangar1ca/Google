@@ -1,8 +1,15 @@
+# Keep only appsscript.json and files in src
 **/**
+!src/**
 !appsscript.json
-!src/*.js
-!src/*.gs
-!src/*.html
-.agent/**
-README.md
+
+# Explicitly ignore common noise
 node_modules/**
+.git/**
+.agent/**
+data/**
+README.md
+tsconfig.json
+.claspignore
+.clasp.json
+.gitignore
