@@ -110,3 +110,44 @@ function actualizarTope(codigo) {
     }
   }
 }
+
+/**
+ * Valida un movimiento detectado por el trigger onEdit.
+ * @param {GoogleAppsScript.Spreadsheet.Range} range El rango editado.
+ */
+function validarMovimiento(range) {
+  const sheet = range.getSheet();
+  const row = range.getRow();
+  
+  // No validar el encabezado
+  if (row === 1) return;
+
+  const rowData = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const colIndex = {
+    tipo: headers.indexOf('Tipo'),
+    codigoOrigen: headers.indexOf('Codigo_Origen'),
+    codigoDestino: headers.indexOf('Codigo_Destino'),
+    cantidad: headers.indexOf('Cantidad_Movida')
+  };
+
+  const tipo = rowData[colIndex.tipo];
+  const codOrigen = rowData[colIndex.codigoOrigen];
+  const codDestino = rowData[colIndex.codigoDestino];
+  const cantidad = rowData[colIndex.cantidad];
+
+  try {
+    if (tipo === 'Ampliación 20%') {
+      const esValido = validarAmpliacionArt80(codDestino, cantidad);
+      if (!esValido) {
+        SpreadsheetApp.getUi().alert('⚠️ Error de Validación: La ampliación excede el 20% permitido por el Art. 80.');
+      }
+    } else if (tipo === 'Reasignación') {
+      reasignarPresupuesto(codOrigen, codDestino, cantidad);
+    }
+  } catch (e) {
+    SpreadsheetApp.getUi().alert('❌ Error en el movimiento: ' + e.message);
+  }
+}
+
