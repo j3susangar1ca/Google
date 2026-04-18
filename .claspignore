@@ -1,9 +1,3 @@
-# Keep only appsscript.json and files in src
-**/**
-!src/**
-!appsscript.json
-
-# Explicitly ignore common noise
 node_modules/**
 .git/**
 .agent/**
