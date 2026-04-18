@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build and Outputs
+dist/
+out/
+build/
+*.log
+
+# Clasp / Google Apps Script
+# .clasp.json contains the script ID. 
+# Keep it if you want others to sync to the same script.
+# Ignore it if you want others to create their own script link.
+# .clasp.json
+
+# Credentials and Secrets
+.env
+.env.local
+clasp-creds.json
+creds.json
+
+# IDE and OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Local Data and Agent
+data/
+.agent/
+brain/
+artifacts/
+scratch/
