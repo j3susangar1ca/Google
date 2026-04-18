@@ -2,7 +2,7 @@
  * Configura las tablas necesarias en la hoja de cálculo según el esquema definido.
  * Crea las pestañas 'Catalogo', 'Procedimientos', 'Consumos' y 'Movimientos' si no existen.
  */
-function configurarTablas() {
+function setupSheets() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const tablas = {
     'Catalogo': [
@@ -46,7 +46,7 @@ function configurarTablas() {
     
     SpreadsheetApp.getUi().alert('Configuración de tablas completada con éxito.');
   } catch (e) {
-    Logger.log('Error en configurarTablas: ' + e.toString());
+    Logger.log('Error en setupSheets: ' + e.toString());
     throw new Error('No se pudo completar la configuración de tablas: ' + e.message);
   }
 }
